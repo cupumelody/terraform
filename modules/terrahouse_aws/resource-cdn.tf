@@ -2,15 +2,15 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_origin_access_control
 # https://aws.amazon.com/blogs/networking-and-content-delivery/amazon-cloudfront-introduces-origin-access-control-oac/
 resource "aws_cloudfront_origin_access_control" "default" {
-  name   = "OAC ${var.bucket_name}"
-  description  = "Origin Access Controls for Static Website Hosting ${var.bucket_name}"
+  name              = "DAC ${var.bucket_name} -2"
+  description       = "Origin Access Controls for static Website Hosting ${var.bucket_name}"
   origin_access_control_origin_type = "s3"
   signing_behavior  = "always"
   signing_protocol  = "sigv4"
 }
 
 locals {
-  s3_origin_id = "MyS3Origin"
+  s3_origin_id = "MyS3origin"
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution
