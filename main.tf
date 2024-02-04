@@ -38,7 +38,7 @@ provider "terratowns" {
 #}
 
 resource "terratowns_home" "home" {
-  name = "Berserk"
+  name = "Berserk!"
   description = <<DESCRIPTION
 "Berserk," the magnum opus of Kentaro Miura, unfolds in a grim medieval world, 
 following the tortured journey of Guts, a lone mercenary seeking vengeance against his former comrade 
@@ -49,6 +49,6 @@ presenting a nightmarish landscape filled with grotesque creatures that challeng
 DESCRIPTION
   #domain_name = module.terrahouse_aws.cloudfront_url
   domain_name = "4sw23b.cloudfront.net"
-  town = "manga-anime"
+  town = "gamers-grotto"
   content_version = 1
 }
