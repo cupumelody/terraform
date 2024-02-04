@@ -49,6 +49,6 @@ presenting a nightmarish landscape filled with grotesque creatures that challeng
 DESCRIPTION
   #domain_name = module.terrahouse_aws.cloudfront_url
   domain_name = "4sw23b.cloudfront.net"
-  town = "manga"
+  town = "manga-anime"
   content_version = 1
 }
