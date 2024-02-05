@@ -13,32 +13,29 @@ terraform {
   #    name = "terra-house-1"
   #  }
   #}
-  #cloud {
-  #  organization = "cupumel0dy"
-  #  workspaces {
-  # name = "terra-house-1"
-  #  }
-  #}
+  cloud {
+    organization = "cupumel0dy"
+    workspaces {
+   name = "terra-house-1"
+    }
+  }
 }
 
 provider "terratowns" {
   endpoint = var.terratowns_endpoint
   user_uuid = var.teacherseat_user_uuid
   token = var.terratowns_access_token
-  
 }
 
-module "terrahouse_aws" {
-  source = "./modules/terrahouse_aws"
+module "home_berserk_hosting" {
+  source = "./modules/terrahome_aws"
   user_uuid = var.teacherseat_user_uuid
+  public_path = var.berserk.public_path
   bucket_name = var.bucket_name
-  index_html_filepath = var.index_html_filepath
-  error_html_filepath = var.error_html_filepath
-  content_version = var.content_version
-  assets_path = var.assets_path
+  content_version = var.berserk.content_version
 }
 
-resource "terratowns_home" "home" {
+resource "terratowns_home" "home_berserk" {
   name = "Berserk!"
   description = <<DESCRIPTION
 "Berserk," the magnum opus of Kentaro Miura, unfolds in a grim medieval world, 
@@ -48,8 +45,28 @@ and the dark consequences of power, exploring the depths of human nature and mor
 With intricate storytelling and visceral artwork, "Berserk" delves into the psychological complexities of its characters, 
 presenting a nightmarish landscape filled with grotesque creatures that challenge the boundaries of the human psyche.  
 DESCRIPTION
-  domain_name = module.terrahouse_aws.cloudfront_url
-  #domain_name = "2adw2.cloudfront.net"
+  domain_name = module.home_berserk_hosting.domain_name
   town = "missingo"
-  content_version = 1
+  content_version = var.berserk.content_version
+}
+
+module "home_payday_hosting" {
+  source = "./modules/terrahome_aws"
+  user_uuid = var.teacherseat_user_uuid
+  public_path = var.payday.public_path
+  bucket_name = var.bucket_name
+  content_version = var.payday.content_version
+}
+
+
+resource "terratowns_home" "home_payday" {
+  name = "Making your Payday Bar"
+  description = <<DESCRIPTION
+Since I really like Payday Candy Bar but they cost so much to import into Canada, 
+I decide I would see how I could my own Payday Bars, 
+and if they are more cost effective. 
+DESCRIPTION
+  domain_name = module.home_payday_hosting.domain_name
+  town = "missingo"
+  content_version = var.berserk.content_version
 }
